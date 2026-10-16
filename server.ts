@@ -570,13 +570,19 @@ app.get('/api/admin/logs', (req: Request, res: Response) => {
 // Frontend Mounting (Vite in Dev / Static dist in Prod)
 // -------------------------------------------------------------
 async function startServer() {
-  if (process.env.NODE_ENV === 'production' && fs.existsSync(path.resolve(__dirname, 'dist'))) {
-    app.use(express.static(path.resolve(__dirname, 'dist')));
+  const distDir = path.resolve(__dirname, 'dist');
+  const hasBuiltDist = fs.existsSync(path.resolve(distDir, 'index.html'));
+  const isProduction = process.env.NODE_ENV === 'production' || hasBuiltDist;
+
+  if (isProduction && hasBuiltDist) {
+    console.log(`[Production Mode] Serving prebuilt static assets from ${distDir}`);
+    app.use(express.static(distDir));
     app.get('*', (_req: Request, res: Response) => {
-      res.sendFile(path.resolve(__dirname, 'dist/index.html'));
+      res.sendFile(path.resolve(distDir, 'index.html'));
     });
   } else {
     // In dev: Mount Vite dev server middleware
+    console.log('[Dev Mode] Mounting dynamic Vite middleware');
     const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: { middlewareMode: true },
