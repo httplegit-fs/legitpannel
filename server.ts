@@ -164,7 +164,7 @@ let sitesStore: Record<string, ManagedSite> = {
   'legitmovies': {
     id: 'legitmovies',
     name: 'Legit Movies',
-    url: 'https://legitmovies.onrender.com',
+    url: 'https://legit-movies.onrender.com',
     category: 'movie',
     isDefault: true,
     createdAt: new Date().toISOString(),
@@ -267,20 +267,33 @@ function logApiAccess(req: Request, siteId?: string) {
  * 4. Fallback to default site ('legitmovies')
  */
 function resolveSite(req: Request): ManagedSite {
-  const siteParam = (req.params.siteId || req.query.site as string || '').toLowerCase().trim();
-  if (siteParam && sitesStore[siteParam]) {
-    return sitesStore[siteParam];
+  const siteParam = (req.params.siteId || (req.query.site as string) || '').toLowerCase().trim();
+  if (siteParam) {
+    if (sitesStore[siteParam]) {
+      return sitesStore[siteParam];
+    }
+    // Check aliases like legit-movies vs legitmovies
+    if (siteParam === 'legit-movies' && sitesStore['legitmovies']) {
+      return sitesStore['legitmovies'];
+    }
+    if (siteParam === 'legitmovies' && sitesStore['legit-movies']) {
+      return sitesStore['legit-movies'];
+    }
+    // Search by name match
+    const byName = Object.values(sitesStore).find(s => s.name.toLowerCase().replace(/\s+/g, '-') === siteParam || s.name.toLowerCase() === siteParam);
+    if (byName) return byName;
   }
 
   // Check query domain or origin/referer header
-  const domainQuery = (req.query.domain as string || '').toLowerCase().trim();
-  const originHeader = (req.headers['origin'] || req.headers['referer'] || '').toLowerCase();
+  const domainQuery = ((req.query.domain as string) || '').toLowerCase().trim();
+  const originHeader = ((req.headers['origin'] as string) || (req.headers['referer'] as string) || '').toLowerCase();
 
   for (const site of Object.values(sitesStore)) {
-    if (domainQuery && site.url.toLowerCase().includes(domainQuery)) {
+    const cleanSiteUrl = site.url.toLowerCase().replace(/^https?:\/\//, '').replace(/\/+$/, '');
+    if (domainQuery && (cleanSiteUrl.includes(domainQuery) || domainQuery.includes(cleanSiteUrl))) {
       return site;
     }
-    if (originHeader && originHeader.includes(site.url.toLowerCase().replace(/^https?:\/\//, ''))) {
+    if (originHeader && (originHeader.includes(cleanSiteUrl) || (site.id === 'legitmovies' && (originHeader.includes('legit-movies') || originHeader.includes('legitmovies'))))) {
       return site;
     }
   }
