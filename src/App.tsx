@@ -29,7 +29,7 @@ import { CheckCircle2, AlertCircle } from 'lucide-react';
 const FALLBACK_DEFAULT_SITE: ManagedSite = {
   id: 'legitmovies',
   name: 'Legit Movies',
-  url: 'https://legitmovies.onrender.com',
+  url: 'https://legit-movies.onrender.com',
   category: 'movie',
   isDefault: true,
   createdAt: new Date().toISOString(),
