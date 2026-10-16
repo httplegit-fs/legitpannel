@@ -249,7 +249,7 @@ async function fetchRemoteConfig() {
 
           <div className="p-3 rounded-xl bg-neutral-950 border border-neutral-800 space-y-1">
             <span className="text-[10px] uppercase tracking-wider text-neutral-500 block">Build Command</span>
-            <div className="text-rose-300 font-bold text-xs select-all">npm install && npm run build</div>
+            <div className="text-rose-300 font-bold text-xs select-all">npm install --legacy-peer-deps && npm run build</div>
           </div>
 
           <div className="p-3 rounded-xl bg-neutral-950 border border-neutral-800 space-y-1">
