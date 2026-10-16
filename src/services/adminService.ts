@@ -86,7 +86,7 @@ export async function fetchAllSites(): Promise<ManagedSite[]> {
     {
       id: 'legitmovies',
       name: 'Legit Movies',
-      url: 'https://legitmovies.onrender.com',
+      url: 'https://legit-movies.onrender.com',
       category: 'movie',
       isDefault: true,
       createdAt: new Date().toISOString(),
