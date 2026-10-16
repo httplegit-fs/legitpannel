@@ -1,0 +1,6 @@
+{
+  "name": "Legit Admin Panel - Remote Management Console",
+  "description": "Dedicated remote control dashboard and API server for legitmovies.onrender.com, featuring maintenance controls, broadcast alerts, TMDB key management, and ad network configuration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,25 @@
+{
+  "siteName": "Legit Movies",
+  "maintenance": {
+    "enabled": false,
+    "message": "We are currently performing scheduled maintenance and server upgrades. We will be back online shortly!"
+  },
+  "broadcast": {
+    "enabled": false,
+    "message": "🔥 Welcome to Legit Movies! High-speed streaming is active."
+  },
+  "tmdb": {
+    "apiKey": "9a846efff59a26bc6ebb68286af2aeb8"
+  },
+  "ads": {
+    "headerBannerId": "c9cf205fea000976d8c500911e2b0221",
+    "footerBannerId": "c9cf205fea000976d8c500911e2b0221",
+    "playerTopAdId": "14c52f7b9071dd9a9b839917e51bdcb1",
+    "playerBottomAdId": "a93371a702be78576721f5adc2c2309a",
+    "sidebarAdId": "e497f90baf5dc8f1b9bd0fdc0c5b9613",
+    "nativeInFeedAdId": "ff02012e1215699d9ae3de05f90398ec",
+    "directLinkUrl": "https://directyp.org/4/92399e37a2501a9051194e2f08e3352e",
+    "socialBarScript": "<script data-cfasync=\"false\" src=\"https://bancadeltempoidea.org/14/9a8edf3f113860bd45d90d49d2dc3491\"></script>",
+    "popunderScript": "<script data-cfasync=\"false\" src=\"https://aarems.org/1/b476296eb49c0e1d501decd537ad8157\"></script>"
+  }
+}
